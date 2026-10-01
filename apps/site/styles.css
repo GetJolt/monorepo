@@ -753,6 +753,115 @@ figcaption span {
   font: 700 0.68rem/1 var(--mono);
 }
 
+/* 03 · Social: a still frame of the timeline, drawn with the same parts as Fig. 1. */
+.social {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: 4rem;
+  margin-top: 3.5rem;
+  align-items: start;
+}
+.social__copy {
+  display: grid;
+  gap: 1.1rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+.social__next {
+  padding: 1rem 1.15rem;
+  border: 1px dashed var(--rule-strong);
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+.social__next span {
+  display: block;
+  margin-bottom: 0.3rem;
+  font: 600 0.72rem/1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.feed__post {
+  display: grid;
+  grid-template-columns: 1.85rem minmax(0, 1fr);
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--m-line);
+}
+.feed__post:last-child {
+  border-bottom: 0;
+}
+.feed__who {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+.feed__who em {
+  color: var(--m-muted);
+  font-style: normal;
+  font-weight: 500;
+}
+.feed__chip {
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: #563acc;
+  color: #fff;
+  font: 600 0.6rem/1.5 var(--mono);
+}
+.feed__text {
+  margin-top: 0.2rem;
+  color: #d9d8d2;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+.feed__text b {
+  color: var(--volt);
+  font-weight: 500;
+}
+.feed__photo {
+  display: block;
+  height: 7.5rem;
+  margin-top: 0.55rem;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 58%, #fde6a4 0 13%, transparent 13.5%),
+    linear-gradient(170deg, transparent 58%, #3b4170 58.5% 72%, #22264a 72.5%),
+    linear-gradient(180deg, #f5b56b, #d873a8 60%, #8d5cc4);
+}
+.feed__cw {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--m-line);
+  border-radius: 8px;
+  background: var(--m-raised);
+  font-size: 0.78rem;
+}
+.feed__cw span {
+  color: var(--m-muted);
+  font-weight: 600;
+}
+.feed__actions {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  color: var(--m-muted);
+  font: 500 0.72rem/1 var(--mono);
+}
+.feed__actions .is-on {
+  color: #f47186;
+}
+.feed__actions .is-repost {
+  color: #4ccf8e;
+}
+.feed .mini__pin {
+  margin-left: auto;
+}
+
 /* Ribbon */
 .ribbon {
   height: var(--ribbon-h);
@@ -1405,6 +1514,7 @@ figcaption span {
 
 @media (max-width: 1000px) {
   .cover__grid,
+  .social,
   .anatomy,
   .datasheet,
   .listing-wrap,

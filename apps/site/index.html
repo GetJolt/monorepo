@@ -6,14 +6,14 @@
     <title>Jolt: the free alternative chat</title>
     <meta
       name="description"
-      content="Jolt is an open-source alternative to a certain proprietary platform. Familiar servers and channels, no ads, no paywalls, and you can run it yourself. Free for Windows and Linux, with macOS on the way."
+      content="Jolt is an open-source alternative to a certain proprietary platform. Familiar servers and channels, a timeline that reaches the fediverse, no ads, no paywalls, and you can run it yourself. Free for Windows and Linux, with macOS on the way."
     />
     <meta name="theme-color" content="#f2efe6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#11110f" media="(prefers-color-scheme: dark)" />
     <meta property="og:title" content="Jolt: the free alternative chat" />
     <meta
       property="og:description"
-      content="Open-source, federated chat. No ads, no paywalls, no landlord."
+      content="Open-source, federated chat and a timeline that talks to Mastodon. No ads, no paywalls, no landlord."
     />
     <meta property="og:image" content="assets/app.webp" />
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
@@ -40,16 +40,19 @@
               <a href="#product"><span>02</span>Product</a>
             </li>
             <li>
-              <a href="#federation"><span>03</span>Federation</a>
+              <a href="#social"><span>03</span>Social</a>
             </li>
             <li>
-              <a href="#principles"><span>04</span>Principles</a>
+              <a href="#federation"><span>04</span>Federation</a>
             </li>
             <li>
-              <a href="#self-host"><span>05</span>Self-host</a>
+              <a href="#principles"><span>05</span>Principles</a>
             </li>
             <li>
-              <a href="#sdk"><span>06</span>SDK</a>
+              <a href="#self-host"><span>06</span>Self-host</a>
+            </li>
+            <li>
+              <a href="#sdk"><span>07</span>SDK</a>
             </li>
           </ol>
         </nav>
@@ -68,8 +71,8 @@
             <h1 id="cover-title" class="display">Chat that runs on <em class="hl">your</em> grid.</h1>
             <p class="cover__lede">
               Your community shouldn't live at the mercy of one company's growth targets. Jolt has the
-              servers, channels and roles you already know, with no ads, no paywalled basics and no landlord.
-              Use ours or run your own. One account works on every instance.
+              servers, channels and roles you already know, plus a timeline that reaches Mastodon and the rest
+              of the fediverse. No ads, no paywalled basics, no landlord.
             </p>
             <div class="cover__cta">
               <a class="key" href="#download" data-primary-download>
@@ -190,11 +193,13 @@
         <div class="ribbon__track">
           <span>No ads, ever</span><i>⚡</i><span>No paywalled basics</span><i>⚡</i
           ><span>Open source, top to bottom</span><i>⚡</i><span>Run it on your own hardware</span><i>⚡</i
-          ><span>One account, every instance</span><i>⚡</i><span>Made for keyboards and screen readers</span
-          ><i>⚡</i><span>Nobody owns it</span><i>⚡</i> <span>No ads, ever</span><i>⚡</i
-          ><span>No paywalled basics</span><i>⚡</i><span>Open source, top to bottom</span><i>⚡</i
-          ><span>Run it on your own hardware</span><i>⚡</i><span>One account, every instance</span><i>⚡</i
+          ><span>One account, every instance</span><i>⚡</i><span>A timeline with no algorithm</span><i>⚡</i
+          ><span>Follow anyone on the fediverse</span><i>⚡</i
           ><span>Made for keyboards and screen readers</span><i>⚡</i><span>Nobody owns it</span><i>⚡</i>
+          <span>No ads, ever</span><i>⚡</i><span>No paywalled basics</span><i>⚡</i
+          ><span>Open source, top to bottom</span><i>⚡</i><span>Run it on your own hardware</span><i>⚡</i
+          ><span>One account, every instance</span><i>⚡</i><span>Made for keyboards and screen readers</span
+          ><i>⚡</i><span>Nobody owns it</span><i>⚡</i>
         </div>
       </div>
 
@@ -228,6 +233,11 @@
                 <th scope="row">Who runs the servers?</th>
                 <td>One company, for everyone</td>
                 <td>Whoever you choose, including you</td>
+              </tr>
+              <tr>
+                <th scope="row">Your feed</th>
+                <td>Ranked to keep you scrolling</td>
+                <td>In order, from people you chose</td>
               </tr>
               <tr>
                 <th scope="row">Ads and promotions</th>
@@ -305,7 +315,89 @@
         </div>
       </section>
 
-      <!-- 02 · Federation -->
+      <!-- 03 · Social -->
+      <section class="chapter page" id="social" aria-labelledby="social-title">
+        <header class="chapter__head">
+          <h2 id="social-title" class="display display--md">
+            A timeline in order, from people <em>you</em> chose.
+          </h2>
+        </header>
+        <div class="social">
+          <figure class="plate plate--feed">
+            <div class="mini feed" aria-hidden="true">
+              <div class="mini__bar">
+                <span class="mini__lights"><i></i><i></i><i></i></span>
+                <span class="mini__title">Timeline</span>
+              </div>
+              <article class="feed__post">
+                <span class="msg__av" style="--g: #b44fd6, #f07ad1">M</span>
+                <div>
+                  <p class="feed__who">Maya Chen <em>@maya</em> · 4m <span class="mini__pin">1</span></p>
+                  <p class="feed__text">
+                    Ridge loop this morning. Fog burned off right as we reached the top. <b>#hiking</b>
+                  </p>
+                  <span class="feed__photo"></span>
+                  <p class="feed__actions"><span>↩ 2</span><span>⟳ 5</span><span class="is-on">♥ 18</span></p>
+                </div>
+              </article>
+              <article class="feed__post">
+                <span class="msg__av" style="--g: #6364ff, #a29bfe">L</span>
+                <div>
+                  <p class="feed__who">
+                    Lou <em>@lou@mastodon.social</em> · 9m <span class="feed__chip">Mastodon</span
+                    ><span class="mini__pin">2</span>
+                  </p>
+                  <p class="feed__text">
+                    Following my favourite Jolt community from Mastodon, and it just works.
+                  </p>
+                  <p class="feed__actions">
+                    <span>↩ 1</span><span class="is-repost">⟳ 3</span><span>♥ 12</span>
+                  </p>
+                </div>
+              </article>
+              <article class="feed__post">
+                <span class="msg__av" style="--g: #2f8fd6, #6fd3c6">S</span>
+                <div>
+                  <p class="feed__who">Sam Okafor <em>@sam</em> · 22m <span class="mini__pin">3</span></p>
+                  <p class="feed__cw">⚠ Spoilers for the season finale <span>Show</span></p>
+                  <p class="feed__actions"><span>↩</span><span>⟳ 1</span><span>♥ 4</span></p>
+                </div>
+              </article>
+            </div>
+            <figcaption>
+              <span>Fig. 3</span>
+              <ol class="how">
+                <li>
+                  No algorithm. Posts arrive newest first, from people you follow, and nothing is promoted.
+                </li>
+                <li>
+                  It speaks ActivityPub, so people on Mastodon, Threads and the rest of the fediverse can
+                  follow you, and you them.
+                </li>
+                <li>Images with alt text, content warnings, replies, quotes and followers-only posts.</li>
+              </ol>
+            </figcaption>
+          </figure>
+          <div class="social__copy">
+            <p>
+              Servers are for your communities. The timeline is for everyone else: the friend on another
+              instance, the artist on Mastodon, the project you want to keep up with. It lives right next to
+              your servers in the same app, under the same account.
+            </p>
+            <p>
+              Posts are stored by the instance you signed up on and sent straight to your followers' servers.
+              There's no central feed to rank them and no one deciding what goes viral.
+            </p>
+            <p class="social__next">
+              <span>Bring your other accounts</span> Link Bluesky and Mastodon to show them on your profile
+              with a verified badge, post to them in one go, read and reply to their timelines without leaving
+              Jolt, and find the people you already follow there.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 · Federation -->
       <section class="chapter page" id="federation" aria-labelledby="fed-title">
         <header class="chapter__head">
           <h2 id="fed-title" class="display display--md">
@@ -350,7 +442,7 @@
         </ol>
       </section>
 
-      <!-- 03 · Principles -->
+      <!-- 05 · Principles -->
       <section class="chapter chapter--ink" id="principles" aria-labelledby="principles-title">
         <div class="page">
           <header class="chapter__head">
@@ -387,7 +479,7 @@
         </div>
       </section>
 
-      <!-- 04 · Self-host -->
+      <!-- 06 · Self-host -->
       <section class="chapter page" id="self-host" aria-labelledby="host-title">
         <header class="chapter__head">
           <h2 id="host-title" class="display display--md">An instance in <em>three</em> lines.</h2>
@@ -429,7 +521,7 @@
               </tr>
               <tr>
                 <th scope="row">Federation</th>
-                <td>Open · allowlist · off, with a blocklist</td>
+                <td>Jolt and ActivityPub · open, allowlist or off, with a blocklist</td>
               </tr>
               <tr>
                 <th scope="row">Also serves</th>
@@ -444,7 +536,7 @@
         </div>
       </section>
 
-      <!-- 05 · SDK -->
+      <!-- 07 · SDK -->
       <section class="chapter page" id="sdk" aria-labelledby="sdk-title">
         <header class="chapter__head">
           <h2 id="sdk-title" class="display display--md">
@@ -471,7 +563,7 @@
         </div>
       </section>
 
-      <!-- 06 · Download -->
+      <!-- 08 · Download -->
       <section class="chapter page" id="download" aria-labelledby="download-title">
         <header class="chapter__head">
           <h2 id="download-title" class="display display--md">Take it <em>home.</em></h2>

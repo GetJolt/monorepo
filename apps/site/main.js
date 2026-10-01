@@ -112,7 +112,7 @@ if (!reducedMotion && 'IntersectionObserver' in window) {
     { rootMargin: '0px 0px -12% 0px' },
   );
   const targets =
-    '.chapter__head, .ledger-wrap, .anatomy, .steps, .manifesto, .datasheet, .listing-wrap, .parts';
+    '.chapter__head, .ledger-wrap, .anatomy, .social, .steps, .manifesto, .datasheet, .listing-wrap, .parts';
   for (const el of document.querySelectorAll(targets)) {
     el.classList.add('reveal');
     observer.observe(el);

@@ -2,7 +2,8 @@
 {$JOLT_DOMAIN} {
 	encode zstd gzip
 
-	@instance path /api/* /gateway /.well-known/* /health
+	# The API, the chat gateway, ActivityPub (actors, inboxes, posts, NodeInfo) and public profile pages.
+	@instance path /api/* /gateway /.well-known/* /health /users/* /inbox /posts/* /nodeinfo/* /reposts/* /@* /oauth/*
 	handle @instance {
 		reverse_proxy jolt:4000
 	}
