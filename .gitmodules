@@ -1,0 +1,9 @@
+[submodule "apps/desktop"]
+	path = apps/desktop
+	url = https://github.com/GetJolt/DesktopClient
+[submodule "packages/protocol"]
+	path = packages/protocol
+	url = https://github.com/GetJolt/protocol
+[submodule "packages/sdk"]
+	path = packages/sdk
+	url = https://github.com/GetJolt/protocol

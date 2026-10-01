@@ -12,7 +12,7 @@ node serve.mjs        # http://localhost:8080
 
 ## Downloads
 
-The download buttons read `download/latest.yml`, `latest-mac.yml` and `latest-linux.yml` to find the newest installers, so publishing a release means copying the desktop app's `release/` folder into `download/`. The desktop app reads the same files to update itself.
+The download buttons read `download/latest.yml` and `latest-linux.yml` to find the newest installers, so publishing a release means copying the files from the Desktop release workflow (or the desktop app's `release/` folder) into `download/`. macOS is marked as coming soon for now. When Mac builds arrive, swap that row back to a download link and the site will pick up `latest-mac.yml` too. The desktop app reads the same files to update itself.
 
 ## Invite links
 

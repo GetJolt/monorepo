@@ -7,7 +7,7 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const FEEDS = {
   windows: { feed: 'latest.yml', match: /\.exe$/, label: 'Download for Windows' },
-  mac: { feed: 'latest-mac.yml', match: /\.dmg$/, label: 'Download for macOS' },
+  mac: { feed: 'latest-mac.yml', match: /\.dmg$/, label: 'macOS is coming soon' },
   linux: { feed: 'latest-linux.yml', match: /\.AppImage$/, label: 'Download for Linux' },
 };
 
@@ -56,7 +56,7 @@ async function resolveDownloads() {
   const version = windows?.version || mac?.version || linux?.version;
   if (version) {
     for (const line of document.querySelectorAll('[data-version-line]')) {
-      line.textContent = `Version ${version} · Windows, macOS & Linux · Free and open source`;
+      line.textContent = `Version ${version} · Windows & Linux, macOS soon · Free and open source`;
     }
   }
   return links;

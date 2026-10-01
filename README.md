@@ -37,7 +37,7 @@ Packages have to go out in dependency order, because the split repositories inst
 
 Run `scripts/split-repos.sh` (or `scripts/split-repos.sh sdk` for just one) to push each package's folder, with its history, to its own repository. Publishing a GitHub release in the protocol or SDK repository publishes that version to npm, and a release in the server repository builds the Docker image at `ghcr.io/getjolt/server`.
 
-The desktop app is built with `pnpm --filter @getjolt/desktop release`. Its README covers installers and updates.
+Desktop installers for Windows and Linux are built by the Desktop release workflow, because each one has to be built on its own platform. The desktop README covers installers and updates.
 
 ## Running joltapp.org
 

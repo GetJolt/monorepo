@@ -1043,6 +1043,26 @@ figcaption span {
   min-width: 13rem;
   justify-content: center;
 }
+/* Not a button: a stamped placeholder where the download will go. */
+.key--soon {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1.5px dashed var(--ink-faint);
+  box-shadow: none;
+  font: 600 0.8rem/1 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: default;
+}
+.key--soon:hover,
+.key--soon:active {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+.part--soon h3 {
+  color: var(--ink-soft);
+}
 
 /* Colophon */
 .colophon {
