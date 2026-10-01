@@ -6,7 +6,7 @@ Right now Jolt does text chat: servers, channels and categories, roles and permi
 
 ## Where things live
 
-This monorepo is where day to day development happens. The pieces other people depend on are also published as their own repositories, so you can grab just the part you need.
+This repository ties the whole project together for development. Each part lives in its own repository and is pulled in here as a git submodule, so clone with `--recurse-submodules` (or run `git submodule update --init` in an existing clone).
 
 The [protocol](packages/protocol) defines the wire format, permissions and federation handshake. It's on npm as `@getjolt/protocol` and on GitHub at [GetJolt/protocol](https://github.com/GetJolt/protocol).
 
@@ -14,7 +14,7 @@ The [SDK](packages/sdk) is what you use to build a client. The desktop app is bu
 
 The [server](packages/server) runs an instance. If you want to host one, start with its README or [GetJolt/server](https://github.com/GetJolt/server).
 
-The [desktop app](apps/desktop) and the [website](apps/site) only live here.
+The [desktop app](apps/desktop) is on GitHub at [GetJolt/DesktopClient](https://github.com/GetJolt/DesktopClient). The [website](apps/site) only lives here.
 
 ## Working on it
 
@@ -29,13 +29,15 @@ pnpm dev:desktop    # the desktop app, with hot reload
 
 Before sending a change, run `pnpm lint && pnpm typecheck && pnpm test`. The server tests start real instances, including a pair that federate with each other, so they catch most things.
 
-Inside the monorepo the packages are linked to each other, so a change to the protocol shows up in the server and desktop app straight away. Each package still declares its dependencies by version, which is what lets it work on its own once split out.
+Inside this repository the packages are linked to each other, so a change to the protocol shows up in the server and desktop app straight away. Each package still declares its dependencies by version, which is what lets its own repository build on its own from npm.
+
+A change to a package is committed in that package's folder and pushed to its repository. Then commit the folder here as well, which moves the submodule pointer along, otherwise CI here keeps testing the old version.
 
 ## Releasing
 
 Packages have to go out in dependency order, because the split repositories install each other from npm. Bump the version and changelog in the protocol first, then the SDK, then the server.
 
-Run `scripts/split-repos.sh` (or `scripts/split-repos.sh sdk` for just one) to push each package's folder, with its history, to its own repository. Publishing a GitHub release in the protocol or SDK repository publishes that version to npm, and a release in the server repository builds the Docker image at `ghcr.io/getjolt/server`.
+Publishing a GitHub release in the protocol or SDK repository publishes that version to npm, and a release in the server repository builds the Docker image at `ghcr.io/getjolt/server`.
 
 Desktop installers for Windows and Linux are built by the Desktop release workflow, because each one has to be built on its own platform. The desktop README covers installers and updates.
 

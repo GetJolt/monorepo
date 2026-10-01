@@ -6,4 +6,7 @@
 	url = https://github.com/GetJolt/protocol
 [submodule "packages/sdk"]
 	path = packages/sdk
-	url = https://github.com/GetJolt/protocol
+	url = https://github.com/GetJolt/sdk
+[submodule "packages/server"]
+	path = packages/server
+	url = https://github.com/GetJolt/server
