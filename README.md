@@ -39,7 +39,7 @@ Packages have to go out in dependency order, because the split repositories inst
 
 Publishing a GitHub release in the protocol or SDK repository publishes that version to npm, and a release in the server repository builds the Docker image at `ghcr.io/getjolt/server`.
 
-Desktop installers for Windows and Linux are built by the Desktop release workflow, because each one has to be built on its own platform. The desktop README covers installers and updates.
+Desktop installers for Windows and Linux are built and published by the Desktop release workflow when you push a `desktop-v*` tag, because each one has to be built on its own platform. The website and the app's updater both read that GitHub release. The desktop README has the details.
 
 ## Running joltapp.org
 

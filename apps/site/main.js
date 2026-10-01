@@ -1,14 +1,17 @@
-// Picks the right download for the visitor, resolves the newest installer names from the update feed
-// (latest.yml and friends, written by electron-builder next to the installers in /download), and runs the
-// little federation schematic on the cover.
+// Picks the right download for the visitor, finds the newest installers on the GitHub releases page, and runs
+// the animated app figure on the cover.
 
 document.documentElement.classList.add('js');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const FEEDS = {
-  windows: { feed: 'latest.yml', match: /\.exe$/, label: 'Download for Windows' },
-  mac: { feed: 'latest-mac.yml', match: /\.dmg$/, label: 'macOS is coming soon' },
-  linux: { feed: 'latest-linux.yml', match: /\.AppImage$/, label: 'Download for Linux' },
+const REPO = 'GetJolt/monorepo';
+const RELEASES_PAGE = `https://github.com/${REPO}/releases/latest`;
+
+const PLATFORMS = {
+  windows: { match: /\.exe$/i, label: 'Download for Windows' },
+  mac: { match: /\.dmg$/i, label: 'macOS is coming soon' },
+  linux: { match: /\.AppImage$/i, label: 'Download for Linux' },
+  deb: { match: /\.deb$/i },
 };
 
 function detectPlatform() {
@@ -23,40 +26,57 @@ function detectPlatform() {
   return null;
 }
 
-/** Just enough YAML for electron-builder's feed: the version and the list of file urls. */
-function parseFeed(text) {
-  const version = /^version:\s*(.+)$/m.exec(text)?.[1]?.trim();
-  const files = [...text.matchAll(/^\s*-\s*url:\s*(.+)$/gm)].map((m) => m[1].trim());
-  return { version, files };
-}
-
-async function loadFeed(name) {
+/**
+ * The newest published desktop release. Other tags in the repository are skipped, and the answer is kept for a
+ * few minutes because GitHub only allows 60 unauthenticated API calls an hour per visitor.
+ */
+async function latestRelease() {
+  const cacheKey = 'jolt:release';
   try {
-    const response = await fetch(`download/${name}`, { cache: 'no-cache' });
-    return response.ok ? parseFeed(await response.text()) : null;
+    const cached = JSON.parse(sessionStorage.getItem(cacheKey) ?? 'null');
+    if (cached && Date.now() - cached.at < 10 * 60_000) return cached.release;
+  } catch {
+    // Storage can be unavailable; just ask GitHub.
+  }
+  try {
+    const response = await fetch(`https://api.github.com/repos/${REPO}/releases?per_page=20`, {
+      headers: { accept: 'application/vnd.github+json' },
+    });
+    if (!response.ok) return null;
+    const releases = await response.json();
+    const found = releases.find((r) => !r.draft && !r.prerelease && r.tag_name.startsWith('desktop-v'));
+    const release = found
+      ? {
+          version: found.tag_name.replace(/^desktop-v/, ''),
+          assets: found.assets.map((a) => [a.name, a.browser_download_url]),
+        }
+      : null;
+    try {
+      sessionStorage.setItem(cacheKey, JSON.stringify({ at: Date.now(), release }));
+    } catch {
+      // Not worth failing over.
+    }
+    return release;
   } catch {
     return null;
   }
 }
 
 async function resolveDownloads() {
-  const [windows, mac, linux] = await Promise.all(Object.values(FEEDS).map((f) => loadFeed(f.feed)));
-  const feeds = { windows, mac, linux };
-  const pick = (key) => feeds[key]?.files.find((f) => FEEDS[key].match.test(f));
-
-  const links = { windows: pick('windows'), mac: pick('mac'), linux: pick('linux'), deb: null };
-  // The .deb isn't in the update feed; it shares the AppImage's version.
-  if (feeds.linux?.version) links.deb = `jolt_${feeds.linux.version}_amd64.deb`;
-
-  for (const anchor of document.querySelectorAll('[data-file]')) {
-    const file = links[anchor.dataset.file];
-    if (file) anchor.href = `download/${encodeURIComponent(file)}`;
+  const release = await latestRelease();
+  const links = {};
+  for (const [key, { match }] of Object.entries(PLATFORMS)) {
+    links[key] = release?.assets.find(([name]) => match.test(name))?.[1] ?? null;
   }
 
-  const version = windows?.version || mac?.version || linux?.version;
-  if (version) {
+  // Without a release to point at, every button still leads somewhere useful.
+  for (const anchor of document.querySelectorAll('[data-file]')) {
+    anchor.href = links[anchor.dataset.file] ?? RELEASES_PAGE;
+  }
+
+  if (release) {
     for (const line of document.querySelectorAll('[data-version-line]')) {
-      line.textContent = `Version ${version} · Windows & Linux, macOS soon · Free and open source`;
+      line.textContent = `Version ${release.version} · Windows & Linux, macOS soon · Free and open source`;
     }
   }
   return links;
@@ -66,13 +86,12 @@ const platform = detectPlatform();
 if (platform) {
   document.querySelector(`[data-platform="${platform}"]`)?.classList.add('is-current');
   const label = document.querySelector('[data-primary-label]');
-  if (label) label.textContent = FEEDS[platform].label;
+  if (label) label.textContent = PLATFORMS[platform].label;
 }
 
 resolveDownloads().then((links) => {
   const primary = document.querySelector('[data-primary-download]');
-  if (primary && platform && links[platform])
-    primary.href = `download/${encodeURIComponent(links[platform])}`;
+  if (primary && platform && links[platform]) primary.href = links[platform];
 });
 
 // Let the highlighter swipe draw in once fonts have settled.
@@ -100,97 +119,72 @@ if (!reducedMotion && 'IntersectionObserver' in window) {
   }
 }
 
-/* The schematic: messages travel along traces between instances, and a line of chat pops up on arrival. */
-const map = document.querySelector('[data-grid-map]');
-if (map && !reducedMotion) {
-  const NS = 'http://www.w3.org/2000/svg';
-  const pulses = map.querySelector('[data-pulses]');
-  const bubbles = map.querySelector('[data-bubbles]');
-  const node = (name) => map.querySelector(`[data-node="${name}"]`);
-
-  // Each trace joins two instances; `from` is the start of the path.
-  const routes = [
-    { path: 't-home', from: 'home', to: 'hub' },
-    { path: 't-studio', from: 'studio', to: 'hub' },
-    { path: 't-cafe', from: 'cafe', to: 'hub' },
-    { path: 't-lab', from: 'lab', to: 'hub' },
-    { path: 't-direct', from: 'home', to: 'studio' },
+/* Fig. 1: visit three communities hosted in different places, and post a reply in each from the same account. */
+const mini = document.querySelector('[data-mini]');
+if (mini) {
+  const servers = [...mini.querySelectorAll('[data-server]')];
+  const views = [...mini.querySelectorAll('[data-view]')];
+  const field = (name) => mini.querySelector(`[data-${name}]`);
+  const composer = mini.querySelector('.mini__composer');
+  const draft = mini.querySelector('[data-draft]');
+  const communities = [
+    { name: 'Weekend Hikers', host: 'hosted on joltapp.org', channel: 'trail-talk' },
+    { name: 'Northwind Studio', host: 'hosted by the studio', channel: 'design' },
+    { name: 'Family', host: 'hosted on a PC at home', channel: 'sunday-lunch' },
   ];
-  const lines = {
-    home: ['bob: pushed the fix ⚡', 'bob: anyone around?', 'bob: brb, coffee'],
-    studio: ['mira: new mockups up', 'mira: love this palette', 'mira: shipping friday'],
-    hub: ['alice: standup in 5', 'alice: welcome, everyone!', 'alice: invite sent'],
-    cafe: ['kai: gg, rematch?', 'kai: raid at 9', 'kai: who has the map'],
-    lab: ['dr.osei: results are in', 'dr.osei: seminar moved', 'dr.osei: great question'],
-  };
-  const anchors = {
-    home: [24, 58],
-    studio: [404, 58],
-    hub: [196, 206],
-    cafe: [24, 380],
-    lab: [404, 380],
-  };
+  let current = 0;
+  let timers = [];
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
 
-  function showBubble(target) {
-    const text = lines[target][Math.floor(Math.random() * lines[target].length)];
-    const [x, y] = anchors[target];
-    const g = document.createElementNS(NS, 'g');
-    g.setAttribute('class', 'bubble');
-    const label = document.createElementNS(NS, 'text');
-    label.textContent = text;
-    label.setAttribute('x', String(x + 10));
-    label.setAttribute('y', String(y - 9));
-    const box = document.createElementNS(NS, 'rect');
-    box.setAttribute('x', String(x));
-    box.setAttribute('y', String(y - 24));
-    box.setAttribute('height', '22');
-    box.setAttribute('rx', '6');
-    g.append(box, label);
-    bubbles.append(g);
-    box.setAttribute('width', String(label.getComputedTextLength() + 20));
-    setTimeout(() => g.remove(), 2700);
+  function show(index) {
+    current = index;
+    const { name, host, channel } = communities[index];
+    servers.forEach((s, i) => s.classList.toggle('is-on', i === index));
+    views.forEach((v, i) => v.classList.toggle('is-on', i === index));
+    views[index].classList.remove('is-sent');
+    field('name').textContent = name;
+    field('channel').textContent = channel;
+    field('host').textContent = host;
+    draft.textContent = `Message #${channel}`;
   }
 
-  function send() {
-    const route = routes[Math.floor(Math.random() * routes.length)];
-    const forward = Math.random() > 0.5;
-    const path = map.querySelector(`#${route.path}`);
-    const length = path.getTotalLength();
-    const target = forward ? route.to : route.from;
-    const dot = document.createElementNS(NS, 'circle');
-    dot.setAttribute('r', '5');
-    dot.setAttribute('class', 'pulse');
-    pulses.append(dot);
-
-    const duration = 500 + length * 3.2;
-    const start = performance.now();
-    function frame(now) {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-      const point = path.getPointAtLength((forward ? eased : 1 - eased) * length);
-      dot.setAttribute('cx', String(point.x));
-      dot.setAttribute('cy', String(point.y));
-      if (t < 1) return requestAnimationFrame(frame);
-      dot.remove();
-      const hit = node(target);
-      hit.classList.add('is-hit');
-      setTimeout(() => hit.classList.remove('is-hit'), 500);
-      if (Math.random() > 0.35) showBubble(target);
-    }
-    requestAnimationFrame(frame);
+  function play(index) {
+    timers = [];
+    show(index);
+    const reply = views[index].querySelector('.msg--late .msg__text').textContent;
+    const start = 1100;
+    const perChar = 38;
+    later(() => {
+      composer.classList.add('is-typing');
+      draft.textContent = '';
+    }, start);
+    for (let i = 1; i <= reply.length; i++)
+      later(() => (draft.textContent = reply.slice(0, i)), start + i * perChar);
+    const sent = start + reply.length * perChar + 450;
+    later(() => {
+      composer.classList.remove('is-typing');
+      draft.textContent = `Message #${communities[index].channel}`;
+      views[index].classList.add('is-sent');
+    }, sent);
+    later(() => play((index + 1) % views.length), sent + 3200);
   }
 
-  let timer = null;
-  const run = () => {
-    if (timer) return;
-    send();
-    timer = setInterval(send, 1100);
+  const settle = () => {
+    timers.forEach(clearTimeout);
+    timers = [];
+    composer.classList.remove('is-typing');
+    show(current);
+    views[current].classList.add('is-sent');
   };
-  const stop = () => {
-    clearInterval(timer);
-    timer = null;
-  };
-  // Only animate while the schematic is on screen and the tab is visible.
-  new IntersectionObserver(([entry]) => (entry.isIntersecting ? run() : stop())).observe(map);
-  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : run()));
+
+  if (reducedMotion) {
+    settle();
+  } else {
+    let running = false;
+    const run = () => !running && ((running = true), play(current));
+    const stop = () => running && ((running = false), settle());
+    // Only animate while the figure is on screen and the tab is visible.
+    new IntersectionObserver(([entry]) => (entry.isIntersecting ? run() : stop())).observe(mini);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : run()));
+  }
 }

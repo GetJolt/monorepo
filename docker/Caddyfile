@@ -1,4 +1,4 @@
-# One domain serves the Jolt instance, the website, desktop downloads and the desktop update feed.
+# One domain serves the Jolt instance and the website. Desktop downloads and updates come from GitHub releases.
 {$JOLT_DOMAIN} {
 	encode zstd gzip
 
@@ -10,15 +10,12 @@
 	handle {
 		root * /srv/site
 		header {
-			Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'"
+			Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; connect-src 'self' https://api.github.com; frame-ancestors 'none'; base-uri 'none'"
 			Referrer-Policy "strict-origin-when-cross-origin"
 			X-Content-Type-Options "nosniff"
 			-Server
 		}
 
-		# Update feeds must never be cached, or clients miss new releases.
-		@feed path /download/*.yml
-		header @feed Cache-Control "no-cache"
 		@assets path /assets/*
 		header @assets Cache-Control "public, max-age=604800"
 

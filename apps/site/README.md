@@ -12,7 +12,7 @@ node serve.mjs        # http://localhost:8080
 
 ## Downloads
 
-The download buttons read `download/latest.yml` and `latest-linux.yml` to find the newest installers, so publishing a release means copying the files from the Desktop release workflow (or the desktop app's `release/` folder) into `download/`. macOS is marked as coming soon for now. When Mac builds arrive, swap that row back to a download link and the site will pick up `latest-mac.yml` too. The desktop app reads the same files to update itself.
+The download buttons ask GitHub for the newest `desktop-v*` release of [GetJolt/monorepo](https://github.com/GetJolt/monorepo/releases) and link straight to its installers, so there's nothing to copy here when a version ships. If GitHub can't be reached, or nothing has been released yet, the buttons open the releases page instead. macOS is marked as coming soon for now. When Mac builds arrive, swap that row back to a download link and add `.dmg` to the release.
 
 ## Invite links
 
@@ -20,7 +20,7 @@ When someone opens an invite like `https://joltapp.org/invite/abc123` without th
 
 ## In production
 
-The site is served by Caddy from the [docker](../../docker) setup, on the same domain as the main instance. Caddy sends API and gateway traffic to the server and everything else here, and it makes sure the update files are never cached.
+The site is served by Caddy from the [docker](../../docker) setup, on the same domain as the main instance. Caddy sends API and gateway traffic to the server and everything else here.
 
 ## License
 

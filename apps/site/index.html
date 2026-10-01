@@ -86,65 +86,101 @@
             </p>
           </div>
 
-          <figure class="plate plate--grid">
-            <div
-              class="grid-map"
-              role="img"
-              aria-label="Diagram: five independent Jolt instances, including joltapp.org and self-hosted ones like home.lan, connected by lines that carry messages between them."
-            >
-              <svg viewBox="0 0 560 500" aria-hidden="true" data-grid-map>
-                <defs>
-                  <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <circle cx="1" cy="1" r="1" class="grid-map__dot" />
-                  </pattern>
-                </defs>
-                <rect width="560" height="500" fill="url(#dots)" />
-                <g class="grid-map__traces">
-                  <path id="t-home" d="M90 112 V238 Q90 250 102 250 H196" />
-                  <path id="t-studio" d="M470 112 V238 Q470 250 458 250 H364" />
-                  <path id="t-cafe" d="M90 388 V330 Q90 318 102 318 H268 Q280 318 280 306 V286" />
-                  <path id="t-lab" d="M470 388 V330 Q470 318 458 318 H292 Q280 318 280 306 V286" />
-                  <path id="t-direct" d="M156 89 H404" />
-                </g>
-                <g class="grid-map__nodes">
-                  <g class="node" data-node="home" transform="translate(24 66)">
-                    <rect width="132" height="46" rx="8" />
-                    <circle cx="16" cy="23" r="4" class="node__led" />
-                    <text x="28" y="20" class="node__host">home.lan</text>
-                    <text x="28" y="35" class="node__role">self-hosted</text>
-                  </g>
-                  <g class="node" data-node="studio" transform="translate(404 66)">
-                    <rect width="132" height="46" rx="8" />
-                    <circle cx="16" cy="23" r="4" class="node__led" />
-                    <text x="28" y="20" class="node__host">studio.example</text>
-                    <text x="28" y="35" class="node__role">a design studio</text>
-                  </g>
-                  <g class="node node--hub" data-node="hub" transform="translate(196 214)">
-                    <rect width="168" height="72" rx="10" />
-                    <circle cx="20" cy="26" r="5" class="node__led" />
-                    <text x="34" y="31" class="node__host node__host--big">joltapp.org</text>
-                    <text x="20" y="54" class="node__role">main instance</text>
-                  </g>
-                  <g class="node" data-node="cafe" transform="translate(24 388)">
-                    <rect width="132" height="46" rx="8" />
-                    <circle cx="16" cy="23" r="4" class="node__led" />
-                    <text x="28" y="20" class="node__host">guild.cafe</text>
-                    <text x="28" y="35" class="node__role">a gaming group</text>
-                  </g>
-                  <g class="node" data-node="lab" transform="translate(404 388)">
-                    <rect width="132" height="46" rx="8" />
-                    <circle cx="16" cy="23" r="4" class="node__led" />
-                    <text x="28" y="20" class="node__host">lab.uni.edu</text>
-                    <text x="28" y="35" class="node__role">a research lab</text>
-                  </g>
-                </g>
-                <g data-pulses></g>
-                <g data-bubbles></g>
-              </svg>
+          <figure class="plate plate--how">
+            <div class="mini" aria-hidden="true" data-mini>
+              <div class="mini__bar">
+                <span class="mini__lights"><i></i><i></i><i></i></span>
+                <span class="mini__title">Jolt</span>
+              </div>
+              <div class="mini__body">
+                <ul class="mini__rail">
+                  <li class="mini__home"><img src="assets/logo.svg" alt="" width="20" height="20" /></li>
+                  <li class="mini__sep"></li>
+                  <li class="mini__server is-on" data-server="0" style="--g: #2f9e6e, #9bd64a">WH</li>
+                  <li class="mini__server" data-server="1" style="--g: #3c6df0, #43c6e8">NS</li>
+                  <li class="mini__server" data-server="2" style="--g: #e8743b, #f2c14e">FM</li>
+                </ul>
+
+                <div class="mini__chat">
+                  <div class="mini__head">
+                    <p class="mini__where">
+                      <b data-name>Weekend Hikers</b><span># <span data-channel>trail-talk</span></span>
+                    </p>
+                    <p class="mini__host">
+                      <span data-host>hosted on joltapp.org</span><span class="mini__pin">1</span>
+                    </p>
+                  </div>
+                  <div class="mini__view is-on" data-view="0">
+                    <div class="msg">
+                      <span class="msg__av" style="--g: #b44fd6, #f07ad1">M</span>
+                      <p class="msg__who">Maya <em>joltapp.org</em><span class="mini__pin">2</span></p>
+                      <p class="msg__text">Saturday at 8? The ridge loop should be dry by then.</p>
+                    </div>
+                    <div class="msg">
+                      <span class="msg__av" style="--g: #2f8fd6, #6fd3c6">S</span>
+                      <p class="msg__who">Sam <em>own server</em></p>
+                      <p class="msg__text">I'm in. I'll bring the good trail mix.</p>
+                    </div>
+                    <div class="msg msg--late">
+                      <span class="msg__av msg__av--you">Y</span>
+                      <p class="msg__who">You <em>joltapp.org</em></p>
+                      <p class="msg__text">Count me in ⚡ carpool from the station?</p>
+                    </div>
+                  </div>
+
+                  <div class="mini__view" data-view="1">
+                    <div class="msg">
+                      <span class="msg__av" style="--g: #3c6df0, #43c6e8">A</span>
+                      <p class="msg__who">Alex <em>studio server</em><span class="mini__pin">2</span></p>
+                      <p class="msg__text">New onboarding mockups are up. Thoughts?</p>
+                    </div>
+                    <div class="msg">
+                      <span class="msg__av" style="--g: #d6455f, #f29a6b">R</span>
+                      <p class="msg__who">Rosa <em>studio server</em></p>
+                      <p class="msg__text">The empty states are lovely.</p>
+                    </div>
+                    <div class="msg msg--late">
+                      <span class="msg__av msg__av--you">Y</span>
+                      <p class="msg__who">You <em>joltapp.org</em></p>
+                      <p class="msg__text">Agreed. Ship it on Friday?</p>
+                    </div>
+                  </div>
+
+                  <div class="mini__view" data-view="2">
+                    <div class="msg">
+                      <span class="msg__av" style="--g: #e8743b, #f2c14e">M</span>
+                      <p class="msg__who">Mum <em>home server</em><span class="mini__pin">2</span></p>
+                      <p class="msg__text">Roast at ours on Sunday. Who's coming?</p>
+                    </div>
+                    <div class="msg">
+                      <span class="msg__av" style="--g: #6a5be0, #b18cf2">L</span>
+                      <p class="msg__who">Leo <em>joltapp.org</em></p>
+                      <p class="msg__text">Me! Can I bring a friend?</p>
+                    </div>
+                    <div class="msg msg--late">
+                      <span class="msg__av msg__av--you">Y</span>
+                      <p class="msg__who">You <em>joltapp.org</em></p>
+                      <p class="msg__text">We'll be there by one.</p>
+                    </div>
+                  </div>
+
+                  <p class="mini__composer">
+                    <span data-draft>Message #trail-talk</span><span class="mini__pin">3</span>
+                  </p>
+                </div>
+              </div>
             </div>
             <figcaption>
-              <span>Fig. 1</span> Independent instances, one conversation. Messages travel to wherever a
-              server lives.
+              <span>Fig. 1</span>
+              <ol class="how">
+                <li>
+                  Servers can live anywhere: on joltapp.org, on a studio's own machine, or on a PC at home.
+                </li>
+                <li>
+                  Your one account works in all of them, right next to people who signed up somewhere else.
+                </li>
+                <li>The chat is the whole product. No ads, no upsells, no nagging to pay.</li>
+              </ol>
             </figcaption>
           </figure>
         </div>
@@ -152,12 +188,13 @@
 
       <div class="ribbon" aria-hidden="true">
         <div class="ribbon__track">
-          <span>alice@joltapp.org</span><i>⚡</i><span>bob@home.lan</span><i>⚡</i
-          ><span>mira@studio.example</span><i>⚡</i> <span>kai@guild.cafe</span><i>⚡</i
-          ><span>dr.osei@lab.uni.edu</span><i>⚡</i><span>you@anywhere</span><i>⚡</i>
-          <span>alice@joltapp.org</span><i>⚡</i><span>bob@home.lan</span><i>⚡</i
-          ><span>mira@studio.example</span><i>⚡</i> <span>kai@guild.cafe</span><i>⚡</i
-          ><span>dr.osei@lab.uni.edu</span><i>⚡</i><span>you@anywhere</span><i>⚡</i>
+          <span>No ads, ever</span><i>⚡</i><span>No paywalled basics</span><i>⚡</i
+          ><span>Open source, top to bottom</span><i>⚡</i><span>Run it on your own hardware</span><i>⚡</i
+          ><span>One account, every instance</span><i>⚡</i><span>Made for keyboards and screen readers</span
+          ><i>⚡</i><span>Nobody owns it</span><i>⚡</i> <span>No ads, ever</span><i>⚡</i
+          ><span>No paywalled basics</span><i>⚡</i><span>Open source, top to bottom</span><i>⚡</i
+          ><span>Run it on your own hardware</span><i>⚡</i><span>One account, every instance</span><i>⚡</i
+          ><span>Made for keyboards and screen readers</span><i>⚡</i><span>Nobody owns it</span><i>⚡</i>
         </div>
       </div>
 
@@ -450,7 +487,9 @@
               <p>Windows 10 &amp; 11 · x64 and Arm</p>
             </div>
             <span class="part__here">Your system</span>
-            <a class="key" href="download/" data-file="windows">Download .exe</a>
+            <a class="key" href="https://github.com/GetJolt/monorepo/releases/latest" data-file="windows"
+              >Download .exe</a
+            >
           </li>
           <li class="part part--soon" data-platform="mac">
             <span class="part__no">B</span>
@@ -468,10 +507,18 @@
             <span class="part__no">C</span>
             <div class="part__name">
               <h3>Linux</h3>
-              <p>AppImage for any distro · <a href="download/" data-file="deb">or a .deb</a></p>
+              <p>
+                AppImage for any distro ·
+                <a href="https://github.com/GetJolt/monorepo/releases/latest" data-file="deb">or a .deb</a>
+              </p>
             </div>
             <span class="part__here">Your system</span>
-            <a class="key key--line" href="download/" data-file="linux">Download AppImage</a>
+            <a
+              class="key key--line"
+              href="https://github.com/GetJolt/monorepo/releases/latest"
+              data-file="linux"
+              >Download AppImage</a
+            >
           </li>
         </ul>
       </section>
