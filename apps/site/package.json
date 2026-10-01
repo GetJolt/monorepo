@@ -1,0 +1,11 @@
+{
+  "name": "@getjolt/site",
+  "version": "0.1.0",
+  "description": "Jolt marketing and download site.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node serve.mjs 8080"
+  }
+}

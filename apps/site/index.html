@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jolt: the free alternative chat</title>
+    <meta
+      name="description"
+      content="Jolt is an open-source alternative to a certain proprietary platform. Familiar servers and channels, no ads, no paywalls, and you can run it yourself. Free for Windows, macOS and Linux."
+    />
+    <meta name="theme-color" content="#f2efe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#11110f" media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content="Jolt: the free alternative chat" />
+    <meta
+      property="og:description"
+      content="Open-source, federated chat. No ads, no paywalls, no landlord."
+    />
+    <meta property="og:image" content="assets/app.webp" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="bar">
+      <div class="page bar__inner">
+        <a class="mark" href="#top" aria-label="Jolt, back to top">
+          <img src="assets/logo.svg" alt="" width="26" height="26" />
+          <span>Jolt</span>
+        </a>
+        <nav aria-label="Sections">
+          <ol class="bar__nav">
+            <li>
+              <a href="#why"><span>01</span>Why switch</a>
+            </li>
+            <li>
+              <a href="#product"><span>02</span>Product</a>
+            </li>
+            <li>
+              <a href="#federation"><span>03</span>Federation</a>
+            </li>
+            <li>
+              <a href="#principles"><span>04</span>Principles</a>
+            </li>
+            <li>
+              <a href="#self-host"><span>05</span>Self-host</a>
+            </li>
+            <li>
+              <a href="#sdk"><span>06</span>SDK</a>
+            </li>
+          </ol>
+        </nav>
+        <a class="key key--small" href="#download">Download</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- 00 · Cover -->
+      <section class="cover page" id="top" aria-labelledby="cover-title">
+        <p class="runner" aria-hidden="true">
+          <span>Field manual</span><span>Edition 0.1</span><span>Free &amp; open source</span>
+        </p>
+        <div class="cover__grid">
+          <div class="cover__copy">
+            <h1 id="cover-title" class="display">Chat that runs on <em class="hl">your</em> grid.</h1>
+            <p class="cover__lede">
+              Your community shouldn't live at the mercy of one company's growth targets. Jolt has the
+              servers, channels and roles you already know, with no ads, no paywalled basics and no landlord.
+              Use ours or run your own. One account works on every instance.
+            </p>
+            <div class="cover__cta">
+              <a class="key" href="#download" data-primary-download>
+                <span data-primary-label>Download Jolt</span>
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M10 3v11m0 0-4.5-4.5M10 14l4.5-4.5M4 17h12" />
+                </svg>
+              </a>
+              <p class="cover__spec" data-version-line>Windows · macOS · Linux</p>
+            </div>
+            <p class="cover__alt">
+              <a href="#download">Other platforms</a>
+              <a href="#self-host">Run an instance</a>
+            </p>
+          </div>
+
+          <figure class="plate plate--grid">
+            <div
+              class="grid-map"
+              role="img"
+              aria-label="Diagram: five independent Jolt instances, including joltapp.org and self-hosted ones like home.lan, connected by lines that carry messages between them."
+            >
+              <svg viewBox="0 0 560 500" aria-hidden="true" data-grid-map>
+                <defs>
+                  <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="1" cy="1" r="1" class="grid-map__dot" />
+                  </pattern>
+                </defs>
+                <rect width="560" height="500" fill="url(#dots)" />
+                <g class="grid-map__traces">
+                  <path id="t-home" d="M90 112 V238 Q90 250 102 250 H196" />
+                  <path id="t-studio" d="M470 112 V238 Q470 250 458 250 H364" />
+                  <path id="t-cafe" d="M90 388 V330 Q90 318 102 318 H268 Q280 318 280 306 V286" />
+                  <path id="t-lab" d="M470 388 V330 Q470 318 458 318 H292 Q280 318 280 306 V286" />
+                  <path id="t-direct" d="M156 89 H404" />
+                </g>
+                <g class="grid-map__nodes">
+                  <g class="node" data-node="home" transform="translate(24 66)">
+                    <rect width="132" height="46" rx="8" />
+                    <circle cx="16" cy="23" r="4" class="node__led" />
+                    <text x="28" y="20" class="node__host">home.lan</text>
+                    <text x="28" y="35" class="node__role">self-hosted</text>
+                  </g>
+                  <g class="node" data-node="studio" transform="translate(404 66)">
+                    <rect width="132" height="46" rx="8" />
+                    <circle cx="16" cy="23" r="4" class="node__led" />
+                    <text x="28" y="20" class="node__host">studio.example</text>
+                    <text x="28" y="35" class="node__role">a design studio</text>
+                  </g>
+                  <g class="node node--hub" data-node="hub" transform="translate(196 214)">
+                    <rect width="168" height="72" rx="10" />
+                    <circle cx="20" cy="26" r="5" class="node__led" />
+                    <text x="34" y="31" class="node__host node__host--big">joltapp.org</text>
+                    <text x="20" y="54" class="node__role">main instance</text>
+                  </g>
+                  <g class="node" data-node="cafe" transform="translate(24 388)">
+                    <rect width="132" height="46" rx="8" />
+                    <circle cx="16" cy="23" r="4" class="node__led" />
+                    <text x="28" y="20" class="node__host">guild.cafe</text>
+                    <text x="28" y="35" class="node__role">a gaming group</text>
+                  </g>
+                  <g class="node" data-node="lab" transform="translate(404 388)">
+                    <rect width="132" height="46" rx="8" />
+                    <circle cx="16" cy="23" r="4" class="node__led" />
+                    <text x="28" y="20" class="node__host">lab.uni.edu</text>
+                    <text x="28" y="35" class="node__role">a research lab</text>
+                  </g>
+                </g>
+                <g data-pulses></g>
+                <g data-bubbles></g>
+              </svg>
+            </div>
+            <figcaption>
+              <span>Fig. 1</span> Independent instances, one conversation. Messages travel to wherever a
+              server lives.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <div class="ribbon" aria-hidden="true">
+        <div class="ribbon__track">
+          <span>alice@joltapp.org</span><i>⚡</i><span>bob@home.lan</span><i>⚡</i
+          ><span>mira@studio.example</span><i>⚡</i> <span>kai@guild.cafe</span><i>⚡</i
+          ><span>dr.osei@lab.uni.edu</span><i>⚡</i><span>you@anywhere</span><i>⚡</i>
+          <span>alice@joltapp.org</span><i>⚡</i><span>bob@home.lan</span><i>⚡</i
+          ><span>mira@studio.example</span><i>⚡</i> <span>kai@guild.cafe</span><i>⚡</i
+          ><span>dr.osei@lab.uni.edu</span><i>⚡</i><span>you@anywhere</span><i>⚡</i>
+        </div>
+      </div>
+
+      <!-- 01 · Why switch -->
+      <section class="chapter page" id="why" aria-labelledby="why-title">
+        <header class="chapter__head">
+          <h2 id="why-title" class="display display--md">
+            Every platform gets worse once it needs to please investors. <em>Jolt can't.</em>
+          </h2>
+        </header>
+        <div class="ledger-wrap">
+          <p class="ledger-wrap__copy">
+            It's a familiar story. A chat app wins over communities by being great, then slowly starts working
+            for someone else: ads in your sidebar, features moved behind a subscription, rules you never
+            agreed to. Jolt is open source and anyone can run it, so there's no single company that can do
+            that to you.
+          </p>
+          <table class="ledger">
+            <caption class="sr-only">
+              How Jolt compares with others
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col"><span class="sr-only">Question</span></th>
+                <th scope="col">Others</th>
+                <th scope="col">Jolt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Who runs the servers?</th>
+                <td>One company, for everyone</td>
+                <td>Whoever you choose, including you</td>
+              </tr>
+              <tr>
+                <th scope="row">Ads and promotions</th>
+                <td>Sponsored content in the app</td>
+                <td>None, and nothing to sell</td>
+              </tr>
+              <tr>
+                <th scope="row">Bigger uploads, better quality</th>
+                <td>Behind a monthly subscription</td>
+                <td>Set by each instance, not a paywall</td>
+              </tr>
+              <tr>
+                <th scope="row">The source code</th>
+                <td>Closed</td>
+                <td>Open, every part of it</td>
+              </tr>
+              <tr>
+                <th scope="row">If the rules change</th>
+                <td>Everyone lives with it</td>
+                <td>Each instance makes its own</td>
+              </tr>
+              <tr>
+                <th scope="row">Your conversations</th>
+                <td>Stored on their servers</td>
+                <td>Stored on the server your community picked</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 02 · Product -->
+      <section class="chapter page" id="product" aria-labelledby="product-title">
+        <header class="chapter__head">
+          <h2 id="product-title" class="display display--md">
+            Familiar where it counts. <em>Different</em> where it matters.
+          </h2>
+        </header>
+        <div class="anatomy">
+          <figure class="anatomy__plate">
+            <img
+              src="assets/app.webp"
+              width="1603"
+              height="1020"
+              loading="lazy"
+              alt="The Jolt desktop app showing a server called Northwind Studio, its channels, a conversation in #general with a member from another instance and an invite card, and the member list grouped by role."
+            />
+            <ol class="pins" aria-hidden="true">
+              <li style="--x: 2.8%; --y: 15.5%">1</li>
+              <li style="--x: 16%; --y: 31%">2</li>
+              <li style="--x: 50%; --y: 23.3%">3</li>
+              <li style="--x: 65%; --y: 72%">4</li>
+              <li style="--x: 87%; --y: 6.5%">5</li>
+            </ol>
+          </figure>
+          <ol class="legend">
+            <li>
+              <b>Servers from anywhere.</b> The rail holds servers from every instance you've joined, side by
+              side.
+            </li>
+            <li>
+              <b>Channels, categories, unread.</b> Organise conversation the way your community already does.
+            </li>
+            <li>
+              <b>Neighbours, not strangers.</b> People from other instances show up with their home address.
+            </li>
+            <li>
+              <b>Invites that travel.</b> Paste a link from any instance and it becomes a card you can join
+              from.
+            </li>
+            <li>
+              <b>Roles &amp; presence.</b> Colour-coded roles, real permissions, and who's around right now.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 02 · Federation -->
+      <section class="chapter page" id="federation" aria-labelledby="fed-title">
+        <header class="chapter__head">
+          <h2 id="fed-title" class="display display--md">
+            Your home instance vouches for you. <em>That's it.</em>
+          </h2>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <svg viewBox="0 0 120 80" aria-hidden="true" class="step__art">
+              <rect x="20" y="14" width="80" height="52" rx="6" />
+              <path d="M34 32h40M34 44h28" />
+              <circle cx="86" cy="54" r="10" class="fill" />
+              <path d="M82 54l3 3 5-6" class="tick" />
+            </svg>
+            <p class="step__no">Step 1 / 3</p>
+            <h3>Sign in at home</h3>
+            <p>Your account lives on one instance. It signs a short-lived certificate for this device.</p>
+          </li>
+          <li class="step">
+            <svg viewBox="0 0 120 80" aria-hidden="true" class="step__art">
+              <rect x="8" y="24" width="38" height="32" rx="5" />
+              <rect x="74" y="24" width="38" height="32" rx="5" />
+              <path d="M46 34h28M74 46H46" class="flow" />
+              <path d="M68 30l6 4-6 4M52 42l-6 4 6 4" />
+            </svg>
+            <p class="step__no">Step 2 / 3</p>
+            <h3>Show it anywhere</h3>
+            <p>
+              Another instance checks the certificate against your home's public key. No new account needed.
+            </p>
+          </li>
+          <li class="step">
+            <svg viewBox="0 0 120 80" aria-hidden="true" class="step__art">
+              <rect x="14" y="12" width="60" height="26" rx="13" />
+              <rect x="46" y="44" width="60" height="26" rx="13" class="fill" />
+              <path d="M28 25h32M60 57h32" />
+            </svg>
+            <p class="step__no">Step 3 / 3</p>
+            <h3>Talk where the server lives</h3>
+            <p>Messages stay on the instance that hosts the server. Nothing is copied around the network.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- 03 · Principles -->
+      <section class="chapter chapter--ink" id="principles" aria-labelledby="principles-title">
+        <div class="page">
+          <header class="chapter__head">
+            <h2 id="principles-title" class="display display--md">Six promises, <em>in writing.</em></h2>
+          </header>
+          <ol class="manifesto">
+            <li>
+              <h3>Your server, your rules.</h3>
+              <p>Every instance is run by the people who use it, with its own moderation and policies.</p>
+            </li>
+            <li>
+              <h3>No ads. No tracking.</h3>
+              <p>Nothing to sell, so nothing to watch. Conversations are not a product.</p>
+            </li>
+            <li>
+              <h3>One account, every instance.</h3>
+              <p>Join servers anywhere with the address you already have.</p>
+            </li>
+            <li>
+              <h3>Built for everyone.</h3>
+              <p>
+                Full keyboard control, screen reader support, high contrast and scalable text from day one.
+              </p>
+            </li>
+            <li>
+              <h3>Open all the way down.</h3>
+              <p>Server, protocol, SDK and apps. Read it, audit it, fork it.</p>
+            </li>
+            <li>
+              <h3>Small enough to own.</h3>
+              <p>One process and one database file. A spare computer will do.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 04 · Self-host -->
+      <section class="chapter page" id="self-host" aria-labelledby="host-title">
+        <header class="chapter__head">
+          <h2 id="host-title" class="display display--md">An instance in <em>three</em> lines.</h2>
+        </header>
+        <div class="datasheet">
+          <ol class="procedure">
+            <li>
+              <p>Point a domain at a machine with Docker.</p>
+            </li>
+            <li>
+              <p>Set your domain.</p>
+              <code>echo JOLT_DOMAIN=chat.example.org &gt; .env</code>
+            </li>
+            <li>
+              <p>Start it. HTTPS is handled for you.</p>
+              <code>docker compose up -d</code>
+            </li>
+          </ol>
+          <table class="spec">
+            <caption>
+              Specification
+            </caption>
+            <tbody>
+              <tr>
+                <th scope="row">Runtime</th>
+                <td>Node.js 22+, or the Docker image</td>
+              </tr>
+              <tr>
+                <th scope="row">Database</th>
+                <td>SQLite by default · Postgres when you grow</td>
+              </tr>
+              <tr>
+                <th scope="row">TLS</th>
+                <td>Automatic, via the bundled Caddy config</td>
+              </tr>
+              <tr>
+                <th scope="row">Sign-ups</th>
+                <td>Open · invite code · closed</td>
+              </tr>
+              <tr>
+                <th scope="row">Federation</th>
+                <td>Open · allowlist · off, with a blocklist</td>
+              </tr>
+              <tr>
+                <th scope="row">Also serves</th>
+                <td>This website, desktop downloads and updates</td>
+              </tr>
+              <tr>
+                <th scope="row">Licence</th>
+                <td>AGPL-3.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 05 · SDK -->
+      <section class="chapter page" id="sdk" aria-labelledby="sdk-title">
+        <header class="chapter__head">
+          <h2 id="sdk-title" class="display display--md">
+            The app is a thin layer. <em>Build your own.</em>
+          </h2>
+        </header>
+        <div class="listing-wrap">
+          <p class="listing-wrap__copy">
+            Sign-in, federation, the live store, optimistic messages and read markers all live in
+            <code>@getjolt/sdk</code>. The desktop app is just one client. A web app, a bot or something
+            nobody has thought of yet can use exactly the same foundations.
+          </p>
+          <figure class="listing">
+            <figcaption><span>Listing 1</span> client.ts</figcaption>
+            <pre><code><span class="ln">1</span><span class="k">import</span> { JoltSession } <span class="k">from</span> <span class="s">'@getjolt/sdk'</span>;
+<span class="ln">2</span>
+<span class="ln">3</span><span class="k">const</span> session = <span class="k">new</span> JoltSession({ storage });
+<span class="ln">4</span><span class="k">await</span> session.login(<span class="s">'joltapp.org'</span>, <span class="s">'alice'</span>, password);
+<span class="ln">5</span>
+<span class="ln">6</span>session.store.subscribe(render);   <span class="c">// live, normalised state</span>
+<span class="ln">7</span><span class="k">await</span> session.joinInvite(invite);  <span class="c">// federates if it needs to</span>
+<span class="ln">8</span><span class="k">await</span> session.sendMessage(channel, <span class="s">'hello **world**'</span>);</code></pre>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 06 · Download -->
+      <section class="chapter page" id="download" aria-labelledby="download-title">
+        <header class="chapter__head">
+          <h2 id="download-title" class="display display--md">Take it <em>home.</em></h2>
+          <p class="chapter__note" data-version-line>
+            Free. Open source. Updates itself quietly in the background.
+          </p>
+        </header>
+        <ul class="parts">
+          <li class="part" data-platform="windows">
+            <span class="part__no">A</span>
+            <div class="part__name">
+              <h3>Windows</h3>
+              <p>Windows 10 &amp; 11 · x64 and Arm</p>
+            </div>
+            <span class="part__here">Your system</span>
+            <a class="key" href="download/" data-file="windows">Download .exe</a>
+          </li>
+          <li class="part" data-platform="mac">
+            <span class="part__no">B</span>
+            <div class="part__name">
+              <h3>macOS</h3>
+              <p>macOS 12 or later · Apple silicon and Intel</p>
+            </div>
+            <span class="part__here">Your system</span>
+            <a class="key key--line" href="download/" data-file="mac">Download .dmg</a>
+          </li>
+          <li class="part" data-platform="linux">
+            <span class="part__no">C</span>
+            <div class="part__name">
+              <h3>Linux</h3>
+              <p>AppImage for any distro · <a href="download/" data-file="deb">or a .deb</a></p>
+            </div>
+            <span class="part__here">Your system</span>
+            <a class="key key--line" href="download/" data-file="linux">Download AppImage</a>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <div class="page">
+        <div class="colophon__top">
+          <p class="colophon__word" aria-hidden="true">Jolt</p>
+          <p class="colophon__line">Nobody owns it.<br /><em>Anybody can run it.</em></p>
+        </div>
+        <div class="colophon__row">
+          <p>Open-source, federated chat. Server under AGPL-3.0; apps and SDK under MIT.</p>
+          <p>Set in Fraunces, Inter &amp; JetBrains Mono.</p>
+          <p>© 2026 The Jolt contributors</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

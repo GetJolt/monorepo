@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>You're invited to Jolt</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .invite {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 2rem 1.5rem;
+      }
+      .invite .plate {
+        width: min(28rem, 100%);
+        padding: 2.5rem 2rem 2rem;
+      }
+      .invite h1 {
+        margin-top: 1.5rem;
+        font-size: clamp(2.2rem, 7vw, 3rem);
+      }
+      .invite p {
+        margin-top: 0.9rem;
+        color: var(--ink-soft);
+      }
+      .invite__actions {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+      .invite__actions .key {
+        justify-content: center;
+      }
+      .invite__code {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="invite">
+      <div class="plate">
+        <p class="kicker">You've been invited</p>
+        <h1 class="display display--md">Come <em>join</em> the conversation.</h1>
+        <p>Open the invite in the Jolt app to join. Your account works on every Jolt instance.</p>
+        <div class="invite__actions">
+          <a class="key" id="open" href="/">Open in Jolt</a>
+          <a class="key key--line" href="/#download">I don't have Jolt yet</a>
+        </div>
+        <p class="invite__code" id="code"></p>
+      </div>
+    </main>
+    <script src="/invite.js"></script>
+  </body>
+</html>

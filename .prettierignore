@@ -1,0 +1,7 @@
+dist
+out
+release
+pnpm-lock.yaml
+LICENSE
+LICENSE-MIT
+**/LICENSE

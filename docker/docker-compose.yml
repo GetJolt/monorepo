@@ -1,0 +1,50 @@
+# A Jolt instance behind Caddy (automatic HTTPS), data in SQLite, plus the website and desktop downloads.
+# 1. Point your domain's DNS at this machine.  2. Copy .env.example to .env and set JOLT_DOMAIN.
+# 3. `docker compose up -d`.  Put desktop release files in apps/site/download to offer downloads and updates.
+# For Postgres, start with `--profile postgres` and set JOLT_DATABASE to the postgres:// URL.
+services:
+  jolt:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    environment:
+      JOLT_DOMAIN: ${JOLT_DOMAIN:?Set JOLT_DOMAIN in docker/.env}
+      JOLT_NAME: My Jolt instance
+      JOLT_REGISTRATION: open
+      JOLT_FEDERATION: open
+      JOLT_TRUST_PROXY: 'true'
+      # JOLT_DATABASE: postgres://jolt:change-me@postgres:5432/jolt
+    volumes:
+      - jolt-data:/data
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      JOLT_DOMAIN: ${JOLT_DOMAIN:?Set JOLT_DOMAIN in docker/.env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ../apps/site:/srv/site:ro
+      - caddy-data:/data
+    depends_on:
+      - jolt
+
+  postgres:
+    image: postgres:17
+    profiles: [postgres]
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: jolt
+      POSTGRES_PASSWORD: change-me
+      POSTGRES_DB: jolt
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  jolt-data:
+  caddy-data:
+  postgres-data:

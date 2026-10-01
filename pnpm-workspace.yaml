@@ -1,0 +1,24 @@
+packages:
+  - packages/*
+  - apps/*
+
+# Packages depend on each other by version range so each one also works as its own repo; inside the
+# monorepo, pnpm links the local copy instead of downloading it.
+linkWorkspacePackages: true
+
+allowBuilds:
+  better-sqlite3: true
+  electron: true
+  esbuild: true
+  '@node-rs/argon2': true
+  electron-winstaller: false
+
+minimumReleaseAgeExclude:
+  - '@vitest/mocker@5.0.3'
+  - '@vitest/spy@5.0.3'
+  - vitest@5.0.3
+  - pg-cloudflare@1.4.1
+  - pg-connection-string@2.14.1
+  - pg-protocol@1.16.1
+  - pg@8.23.1
+  - electron@44.5.1
