@@ -14,13 +14,14 @@
         min-height: 100vh;
         padding: 2rem 1.5rem;
       }
-      .invite .plate {
+      .invite .card {
         width: min(28rem, 100%);
         padding: 2.5rem 2rem 2rem;
       }
       .invite h1 {
-        margin-top: 1.5rem;
-        font-size: clamp(2.2rem, 7vw, 3rem);
+        margin-top: 1.25rem;
+        font-size: clamp(2rem, 7vw, 2.6rem);
+        font-weight: 750;
       }
       .invite p {
         margin-top: 0.9rem;
@@ -42,10 +43,10 @@
   </head>
   <body>
     <main class="invite">
-      <div class="plate">
-        <p class="kicker">You've been invited</p>
-        <h1 class="display display--md">Come <em>join</em> the conversation.</h1>
-        <p>Open the invite in the Jolt app to join. Your account works on every Jolt instance.</p>
+      <div class="card">
+        <p class="tag">You've been invited</p>
+        <h1>Come join the chat</h1>
+        <p>Open the invite in the Jolt app to join. Your account works on every Jolt server.</p>
         <div class="invite__actions">
           <a class="key" id="open" href="/">Open in Jolt</a>
           <a class="key key--line" href="/#download">I don't have Jolt yet</a>

@@ -1,5 +1,5 @@
 // Picks the right download for the visitor, finds the newest installers on the GitHub releases page, and runs
-// the animated app figure on the cover.
+// the little animated app in the hero.
 
 document.documentElement.classList.add('js');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -76,8 +76,10 @@ async function resolveDownloads() {
 
   if (release) {
     for (const line of document.querySelectorAll('[data-version-line]')) {
-      line.textContent = `Version ${release.version} · Windows & Linux, macOS soon · Free and open source`;
+      line.textContent = `Version ${release.version}. Free, and it keeps itself up to date.`;
     }
+    const tag = document.querySelector('[data-version-tag]');
+    if (tag) tag.textContent = `v${release.version} · early days`;
   }
   return links;
 }
@@ -94,12 +96,12 @@ resolveDownloads().then((links) => {
   if (primary && platform && links[platform]) primary.href = links[platform];
 });
 
-// Let the highlighter swipe draw in once fonts have settled.
+// Let the marker swipe draw in once fonts have settled.
 document.fonts.ready.then(() =>
   requestAnimationFrame(() => document.documentElement.classList.add('is-loaded')),
 );
 
-// Fade chapters in as they scroll into view.
+// Fade sections in as they scroll into view.
 if (!reducedMotion && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -111,15 +113,14 @@ if (!reducedMotion && 'IntersectionObserver' in window) {
     },
     { rootMargin: '0px 0px -12% 0px' },
   );
-  const targets =
-    '.chapter__head, .ledger-wrap, .anatomy, .social, .steps, .manifesto, .datasheet, .listing-wrap, .parts';
+  const targets = '.section__head, .shot, .split, .steps, .note, .downloads';
   for (const el of document.querySelectorAll(targets)) {
     el.classList.add('reveal');
     observer.observe(el);
   }
 }
 
-/* Fig. 1: visit three communities hosted in different places, and post a reply in each from the same account. */
+/* Visit three communities hosted in different places, and post a reply in each from the same account. */
 const mini = document.querySelector('[data-mini]');
 if (mini) {
   const servers = [...mini.querySelectorAll('[data-server]')];
