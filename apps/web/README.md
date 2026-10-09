@@ -20,7 +20,7 @@ pnpm dev:web        # the web client on localhost:5173
 
 ## Building and hosting
 
-`pnpm build` writes a static site to `dist`, made to be served at `/app` on joltapp.org. Then `pnpm serve` (or `pnpm serve:web` from the repository root) serves it on port 8081, or whichever port you pass, at `/app/`. Point your reverse proxy's `/app` and `/app/*` at it. The [docker](../../docker) setup serves `dist` straight from Caddy instead.
+From the repository root, `pnpm build:web` builds the protocol and SDK and then the web client, into a static site in `dist` made to be served at `/app` on joltapp.org. Building only this package reuses whatever SDK build is lying around, which breaks the app when the SDK has changed since. Then `pnpm serve:web` serves it on port 8081, or whichever port you pass, at `/app/`. Point your reverse proxy's `/app` and `/app/*` at it. The [docker](../../docker) setup serves `dist` straight from Caddy instead.
 
 When it's served from an instance, the sign-in screen suggests that instance. To suggest a different one, set `VITE_DEFAULT_INSTANCE` when building. People can still sign in anywhere, because every instance accepts requests from other origins.
 

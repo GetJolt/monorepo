@@ -1,4 +1,5 @@
-// Serves the built web client at /app, the way joltapp.org hosts it. Run `pnpm build` first.
+// Serves the built web client at /app, the way joltapp.org hosts it. Build it first with `pnpm build:web` from the
+// repository root.
 //   node serve.mjs [port]
 
 import { createReadStream } from 'node:fs';

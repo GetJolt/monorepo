@@ -13,6 +13,7 @@
     "dev:server": "pnpm --filter @getjolt/server dev",
     "dev:desktop": "pnpm --filter @getjolt/desktop dev",
     "dev:web": "pnpm --filter @getjolt/web dev",
+    "build:web": "turbo run build --filter=@getjolt/web",
     "serve:web": "pnpm --filter @getjolt/web serve",
     "typecheck": "turbo run typecheck",
     "lint": "eslint .",

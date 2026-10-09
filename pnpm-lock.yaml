@@ -400,7 +400,7 @@ importers:
         specifier: ^2.3.10
         version: 2.3.10
       '@getjolt/protocol':
-        specifier: ^0.2.0
+        specifier: ^0.2.1
         version: link:../protocol
       '@js-temporal/polyfill':
         specifier: ^0.5.1
@@ -428,7 +428,7 @@ importers:
         version: 4.6.5
     devDependencies:
       '@getjolt/sdk':
-        specifier: ^0.2.1
+        specifier: ^0.2.2
         version: link:../sdk
       '@types/better-sqlite3':
         specifier: ^9.6.0
