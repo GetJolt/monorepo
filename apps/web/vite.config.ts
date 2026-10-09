@@ -28,8 +28,8 @@ const csp = (dev: boolean): Plugin => ({
 });
 
 export default defineConfig(({ command }) => ({
-  // Relative paths, so the build works from any folder, like /app/ on an instance.
-  base: './',
+  // joltapp.org/app. Absolute, so the page still finds its files when opened as /app without the slash.
+  base: command === 'build' ? '/app/' : '/',
   resolve: {
     alias: { '@': renderer },
     dedupe: ['react', 'react-dom'],

@@ -20,7 +20,7 @@ pnpm dev:web        # the web client on localhost:5173
 
 ## Building and hosting
 
-`pnpm build` writes a static site to `dist`. It uses relative paths, so it can be served from any folder. The [docker](../../docker) setup serves it at `/app/` on the main instance.
+`pnpm build` writes a static site to `dist`, made to be served at `/app` on joltapp.org. The [docker](../../docker) setup does that; if you serve it some other way, make sure `/app/*` maps to the files in `dist`.
 
 When it's served from an instance, the sign-in screen suggests that instance. To suggest a different one, set `VITE_DEFAULT_INSTANCE` when building. People can still sign in anywhere, because every instance accepts requests from other origins.
 
