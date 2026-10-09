@@ -9,7 +9,8 @@ const RELEASES_PAGE = `https://github.com/${REPO}/releases/latest`;
 
 const PLATFORMS = {
   windows: { match: /\.exe$/i, label: 'Download for Windows' },
-  mac: { match: /\.dmg$/i, label: 'macOS is coming soon' },
+  // No Mac build yet, so Mac visitors get the browser version instead.
+  mac: { match: /\.dmg$/i, label: 'Open Jolt in your browser' },
   linux: { match: /\.AppImage$/i, label: 'Download for Linux' },
   deb: { match: /\.deb$/i },
 };
@@ -89,6 +90,12 @@ if (platform) {
   document.querySelector(`[data-platform="${platform}"]`)?.classList.add('is-current');
   const label = document.querySelector('[data-primary-label]');
   if (label) label.textContent = PLATFORMS[platform].label;
+  if (platform === 'mac') {
+    const primary = document.querySelector('[data-primary-download]');
+    primary?.setAttribute('href', '/app/');
+    primary?.querySelector('svg')?.remove();
+    document.querySelector('[data-secondary-action]')?.remove();
+  }
 }
 
 resolveDownloads().then((links) => {

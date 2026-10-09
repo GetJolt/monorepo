@@ -37,7 +37,10 @@
           <a href="#developers">Developers</a>
           <a href="https://github.com/GetJolt">GitHub</a>
         </nav>
-        <a class="key key--small" href="#download">Download</a>
+        <div class="bar__actions">
+          <a class="key key--small key--line" href="/app/">Open in browser</a>
+          <a class="key key--small" href="#download">Download</a>
+        </div>
       </div>
     </header>
 
@@ -60,9 +63,12 @@
                 <path d="M10 3v11m0 0-4.5-4.5M10 14l4.5-4.5M4 17h12" />
               </svg>
             </a>
-            <a class="link" href="#self-host">or host your own</a>
+            <a class="key key--line" href="/app/" data-secondary-action>Open in your browser</a>
           </div>
-          <p class="hero__note">Windows and Linux for now. macOS is on the way.</p>
+          <p class="hero__note">
+            Windows and Linux for now, macOS is on the way. Want your own server?
+            <a class="link" href="#self-host">Host one</a>.
+          </p>
         </div>
 
         <figure class="hero__demo">
@@ -387,10 +393,15 @@ session.store.subscribe(render);   <span class="c">// live state</span>
             <span class="platform__here">Your system</span>
             <h3>macOS</h3>
             <p>
-              Not packaged yet. If you're keen, you can
+              Not packaged yet. Use the browser version for now, or if you're keen,
               <a href="https://github.com/GetJolt">build it from source</a>.
             </p>
             <span class="key key--soon">Coming soon</span>
+          </li>
+          <li class="platform" data-platform="browser">
+            <h3>Browser</h3>
+            <p>Nothing to install. Works in any up-to-date browser, on any computer.</p>
+            <a class="key key--line" href="/app/">Open Jolt</a>
           </li>
         </ul>
         <p class="aside">
