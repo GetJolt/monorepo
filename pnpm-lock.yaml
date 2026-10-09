@@ -302,10 +302,10 @@ importers:
   apps/web:
     devDependencies:
       '@getjolt/protocol':
-        specifier: ^0.2.0
+        specifier: ^0.2.1
         version: link:../../packages/protocol
       '@getjolt/sdk':
-        specifier: ^0.2.1
+        specifier: ^0.2.2
         version: link:../../packages/sdk
       '@tailwindcss/vite':
         specifier: ^4.3.3
@@ -360,7 +360,7 @@ importers:
   packages/sdk:
     dependencies:
       '@getjolt/protocol':
-        specifier: ^0.2.0
+        specifier: ^0.2.1
         version: link:../protocol
     devDependencies:
       '@types/node':

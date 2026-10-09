@@ -13,8 +13,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
-    "@getjolt/protocol": "^0.2.0",
-    "@getjolt/sdk": "^0.2.1",
+    "@getjolt/protocol": "^0.2.1",
+    "@getjolt/sdk": "^0.2.2",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^24.9.0",
     "@types/react": "^19.3.0",
