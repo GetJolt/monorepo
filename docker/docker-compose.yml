@@ -29,6 +29,7 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ../apps/site:/srv/site:ro
+      - ../apps/web/dist:/srv/web:ro
       - caddy-data:/data
     depends_on:
       - jolt

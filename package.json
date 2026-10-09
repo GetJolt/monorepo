@@ -12,6 +12,7 @@
     "dev": "turbo run dev --parallel",
     "dev:server": "pnpm --filter @getjolt/server dev",
     "dev:desktop": "pnpm --filter @getjolt/desktop dev",
+    "dev:web": "pnpm --filter @getjolt/web dev",
     "typecheck": "turbo run typecheck",
     "lint": "eslint .",
     "test": "turbo run test",

@@ -14,7 +14,7 @@ The [SDK](packages/sdk) is what you use to build a client. The desktop app is bu
 
 The [server](packages/server) runs an instance. If you want to host one, start with its README or [GetJolt/server](https://github.com/GetJolt/server).
 
-The [desktop app](apps/desktop) is on GitHub at [GetJolt/DesktopClient](https://github.com/GetJolt/DesktopClient). The [website](apps/site) only lives here.
+The [desktop app](apps/desktop) is on GitHub at [GetJolt/DesktopClient](https://github.com/GetJolt/DesktopClient). The [web client](apps/web) is the same app running in a browser tab, built from the desktop app's source, and it only lives here, like the [website](apps/site).
 
 ## Working on it
 
@@ -25,6 +25,7 @@ pnpm install
 pnpm build          # the protocol and SDK need building before anything can use them
 pnpm dev:server     # an instance on localhost:4000
 pnpm dev:desktop    # the desktop app, with hot reload
+pnpm dev:web        # the web client on localhost:5173
 ```
 
 Before sending a change, run `pnpm lint && pnpm typecheck && pnpm test`. The server tests start real instances, including a pair that federate with each other, so they catch most things.
@@ -43,7 +44,7 @@ Desktop installers for Windows and Linux are built and published by the Desktop 
 
 ## Running joltapp.org
 
-The [docker](docker) folder is the setup for the main instance, which serves the website alongside the server from one Caddy. Self hosters don't need it. The server repository has a simpler compose file for that.
+The [docker](docker) folder is the setup for the main instance, which serves the website and the web client (at `/app/`) alongside the server from one Caddy. Build the web client with `pnpm --filter @getjolt/web build` before starting it. Self hosters don't need it. The server repository has a simpler compose file for that.
 
 ## Accessibility
 
@@ -51,4 +52,4 @@ Jolt aims for WCAG 2.2 AA. Everything works from the keyboard: F6 moves between 
 
 ## License
 
-The server is [AGPL-3.0](LICENSE). The protocol, SDK, desktop app and website are [MIT](LICENSE-MIT), so you're free to build on them.
+The server is [AGPL-3.0](LICENSE). The protocol, SDK, desktop app, web client and website are [MIT](LICENSE-MIT), so you're free to build on them.

@@ -1,0 +1,30 @@
+{
+  "name": "@getjolt/web",
+  "version": "0.1.0",
+  "description": "Jolt in the browser: the desktop app's interface, running in a tab.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@getjolt/protocol": "^0.2.0",
+    "@getjolt/sdk": "^0.2.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.9.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.3",
+    "vite": "^7.3.6"
+  },
+  "author": "The Jolt contributors",
+  "homepage": "https://joltapp.org"
+}
